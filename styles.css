@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    /* --- AS LINHAS ABAIXO SÃO AS RESPONSÁVEIS PELO FUNDO --- */
+    background-color: #D3C9E6; /* Um roxo claro */
+    background-image: radial-gradient(circle, #E0D8F0 1px, transparent 1px); /* Pontos sutis */
+    background-size: 20px 20px;
+    /* ----------------------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #4A3A5E;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 4em;
+    color: #FFF;
+    text-shadow:
+        -2px -2px 0 #8A6FC2,
+        2px -2px 0 #8A6FC2,
+        -2px 2px 0 #8A6FC2,
+        2px 2px 0 #8A6FC2;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.links-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button i {
+    margin-right: 10px;
+    font-size: 1.4em;
+}
+
+.github {
+    background-color: #24292E;
+}
+
+.gitlab {
+    background-color: #FC6D26;
+}
+
+.youtube {
+    background-color: #FF0000;
+}
+
+.discord {
+    background-color: #5865F2;
+    padding: 15px 40px;
+}
+
+.button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    .links-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button {
+        width: 80%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+}
