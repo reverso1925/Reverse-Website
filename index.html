@@ -1,449 +1,680 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Reverse Website</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="icon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      animation: backgroundColorPulseBlue 6s infinite alternate;
-      background-image: radial-gradient(rgba(173, 216, 230, 0.5) 1px, transparent 1px),
-                        radial-gradient(rgba(173, 216, 230, 0.5) 1px, transparent 1px);
-      background-position: 0 0, 20px 20px;
-      background-size: 40px 40px;
-      color: #E0FFFF; /* Cor do texto principal do tema */
-      font-family: 'Orbitron', sans-serif; /* Fonte principal do tema */
-    }
+    <style>
+        :root {
+            --main-text-color: #E0FFFF; /* Azul-claro metálico */
+            --primary-blue: #4682B4; /* Steel Blue */
+            --secondary-blue: #6A5ACD; /* Slate Blue */
+            --tertiary-blue: #4169E1; /* Royal Blue */
+            --dark-background: #1A1A1A; /* Quase preto para elementos escuros */
+            --light-blue-accent: #ADD8E6; /* Azul claro para detalhes */
+            --dark-blue-accent: #000080; /* Navy para sombras */
+            --neon-border-color: rgba(173, 216, 230, 0.7); /* LightBlue para bordas neon */
+        }
 
-    /* Animação da cor de fundo (tons de azul) */
-    @keyframes backgroundColorPulseBlue {
-      0% { background-color: #4682B4; }
-      50% { background-color: #6A5ACD; }
-      100% { background-color: #4169E1; }
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: backgroundColorPulseBlue 6s infinite alternate;
+            background-image: radial-gradient(var(--neon-border-color) 1px, transparent 1px),
+                              radial-gradient(var(--neon-border-color) 1px, transparent 1px);
+            background-position: 0 0, 20px 20px;
+            background-size: 40px 40px;
+            color: var(--main-text-color);
+            font-family: 'Orbitron', sans-serif;
+            overflow-x: hidden; /* Evita scroll horizontal indesejado */
+        }
 
-    .content {
-      text-align: center;
-      animation: floatingText 3s ease-in-out infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+        @keyframes backgroundColorPulseBlue {
+            0% { background-color: var(--primary-blue); }
+            50% { background-color: var(--secondary-blue); }
+            100% { background-color: var(--tertiary-blue); }
+        }
 
-    /* Animação de flutuação do texto/conteúdo */
-    @keyframes floatingText {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
+        .content {
+            text-align: center;
+            animation: floatingText 3s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-    h1 {
-      font-size: 80px;
-      font-weight: 700;
-      color: #E0FFFF;
-      margin: 0;
-      text-shadow: -3px -3px 0 #000080, 3px -3px 0 #000080, -3px 3px 0 #000080, 3px 3px 0 #000080;
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 2px;
-    }
+        @keyframes floatingText {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
 
-    .buttons {
-      display: flex;
-      gap: 25px;
-      margin-top: 50px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+        h1 {
+            font-size: 80px;
+            font-weight: 700;
+            color: var(--main-text-color);
+            margin: 0;
+            text-shadow: -3px -3px 0 var(--dark-blue-accent), 3px -3px 0 var(--dark-blue-accent), -3px 3px 0 var(--dark-blue-accent), 3px 3px 0 var(--dark-blue-accent);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
 
-    .button {
-      display: flex;
-      align-items: center;
-      padding: 15px 30px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-      color: white;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
+        .buttons {
+            display: flex;
+            gap: 25px;
+            margin-top: 50px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .button:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+        .button {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
+            color: white;
+            border: 2px solid var(--neon-border-color); /* Borda inicial temática */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative; /* Para o efeito neon */
+            overflow: hidden; /* Para garantir que o pseudo-elemento não vaze */
+        }
 
-    .github {
-      background-color: #1A1A1A;
-      border-color: #666;
-    }
-    .github:hover {
-        background-color: #444;
-    }
+        /* Efeito de neon base para todos os botões, será sobrescrito por classes específicas */
+        .button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            filter: blur(8px); /* Efeito de brilho */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+        }
 
-    .bluesky {
-      background-color: #007bff;
-    }
-    .bluesky:hover {
-        background-color: #0056b3;
-    }
+        .button:hover::before {
+            opacity: 1;
+        }
 
-    .youtube {
-      background-color: #DC143C;
-    }
-    .youtube:hover {
-        background-color: #B2002C;
-    }
+        .button:hover {
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.15); /* Fundo mais claro no hover */
+            border-color: rgba(255, 255, 255, 0.5); /* Borda mais clara no hover */
+        }
 
-    .button i {
-      margin-right: 12px;
-      font-size: 26px;
-    }
+        .github {
+            background-color: #24292e; /* Cinza escuro principal */
+        }
+        .github::before {
+            /* Degradê com tons de cinza do GitHub para um efeito mais integrado */
+            background: linear-gradient(45deg, #000000, #474747, #000000);
+        }
+        .github:hover {
+            background-color: #1a1e22; /* Um cinza um pouco mais escuro no hover */
+            /* Sombra mais suave e brilho sutilmente azulado, como um código */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(88, 166, 255, 0.4);
+        }
+        .bluesky {
+            background-color: #0085FF; /* Azul principal do Bluesky */
+        }
+        .bluesky::before {
+            /* Degradê com azuis do Bluesky, adicionando um tom mais claro e arejado */
+            background: linear-gradient(45deg, #0400FF, #38B0DE, #0400FF);
+        }
+        .bluesky:hover {
+            background-color: #006EDC; /* Azul ligeiramente mais escuro no hover */
+            /* Sombra mais profunda e brilho azul claro para um efeito "céu" */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 20px #5CE1FE;
+        }
+        .youtube {
+            background-color: #FF0000; /* Vermelho icônico do YouTube */
+        }
+        .youtube::before {
+            /* Degradê com tons de vermelho do YouTube, focando na intensidade */
+            background: linear-gradient(45deg, #A10000, #FF0000, #A10000);
+        }
+        .youtube:hover {
+            background-color: #E60000; /* Um vermelho um pouco mais escuro no hover */
+            /* Sombra forte e brilho vibrante para destacar o vermelho */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 20px #FF3333;
+        }
+       .search {
+    background-color: #0000FF; /* Azul do Search */
+}
+        .search::before {
+    /* Degradê com tons de azul do Search, focando na intensidade */
+    background: linear-gradient(45deg, #002575, #0051FF, #002575);
+}
+       .search:hover {
+    background-color: #0000CC; /* Um azul um pouco mais escuro no hover */
+    /* Sombra forte e brilho vibrante para destacar o azul */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 20px #3366FF;
+}
+        }
+        .button i {
+            margin-right: 12px;
+            font-size: 26px;
+        }
 
-    .discord {
-      display: flex;
-      align-items: center;
-      margin-top: 40px;
-      padding: 15px 40px;
-      background-color: #7B68EE;
-      color: white;
-      border-radius: 8px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
+        .discord-promo-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 2px solid var(--neon-border-color);
+            border-bottom: 2px solid var(--neon-border-color);
+            margin-top: 100px;
+        }
 
-    .discord:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
-      background-color: #6A5ACD;
-    }
+        .discord-card {
+            width: 100%;
+            max-width: 1000px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 3px solid var(--neon-border-color);
+            color: var(--main-text-color);
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
 
-    .discord i {
-      margin-right: 12px;
-      font-size: 26px;
-    }
+        .discord-banner {
+            width: 100%;
+            height: 250px;
+            background-image: url('discord_banner.png'); /* Certifique-se de ter esta imagem */
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
 
-    /* Estilos para a nova seção de divulgação do Discord tematizada */
-    .discord-promo-section {
-      width: 100%; /* Ocupa toda a largura disponível */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 80px 20px; /* Padding nas laterais */
-      box-sizing: border-box;
-      background-color: rgba(0, 0, 0, 0.2); /* Fundo sutil transparente para destacar a seção */
-      border-top: 2px solid rgba(173, 216, 230, 0.5); /* Borda superior temática */
-      border-bottom: 2px solid rgba(173, 216, 230, 0.5); /* Borda inferior temática */
-      margin-top: 100px; /* Espaço para separar do conteúdo acima */
-    }
+        .discord-info {
+            padding: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            position: relative;
+        }
 
-    .discord-card {
-      /* Ajustado para não ter max-width fixo, ocupando o espaço com padding */
-      width: 100%;
-      max-width: 1000px; /* Adiciona um max-width para o conteúdo interno não esticar demais em telas muito grandes */
-      background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro mais transparente para o cartão */
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-      border: 2px solid rgba(173, 216, 230, 0.7); /* Borda mais pronunciada e temática */
-      color: #E0FFFF; /* Cor do texto do tema */
-      font-family: 'Orbitron', sans-serif; /* Fonte do tema */
-      position: relative; /* Para posicionar o botão */
-    }
+        .discord-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 5px solid var(--dark-background);
+            background-image: url('discord_avatar.png'); /* Certifique-se de ter esta imagem */
+            background-size: cover;
+            background-position: center;
+            margin-top: -80px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
 
-    .discord-banner {
-      width: 100%;
-      height: 250px; /* Aumentado para mais impacto visual */
-      background-image: url('discord_banner.png');
-      background-size: cover;
-      background-position: center;
-      border-top-left-radius: 13px; /* Levemente menor que o card para borda aparecer */
-      border-top-right-radius: 13px;
-    }
+        .discord-text {
+            flex-grow: 1;
+            text-align: left;
+        }
 
-    .discord-info {
-      padding: 30px;
-      display: flex;
-      align-items: flex-start;
-      gap: 25px;
-      position: relative;
-    }
+        .discord-name {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: var(--main-text-color);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+        }
 
-    .discord-avatar {
-      width: 100px; /* Aumentado para mais destaque */
-      height: 100px;
-      border-radius: 50%;
-      border: 5px solid rgba(0, 0, 0, 0.6); /* Borda do avatar com a cor do fundo do card */
-      background-image: url('discord_avatar.png');
-      background-size: cover;
-      background-position: center;
-      margin-top: -80px; /* Ajusta a sobreposição */
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-      flex-shrink: 0;
-    }
+        .discord-members {
+            font-size: 1.2em;
+            color: var(--light-blue-accent);
+            margin-bottom: 20px;
+        }
 
-    .discord-text {
-      flex-grow: 1;
-      text-align: left; /* Alinha o texto à esquerda */
-    }
+        .discord-description-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--main-text-color);
+            border-bottom: 1px solid rgba(173, 216, 230, 0.4);
+            padding-bottom: 5px;
+        }
 
-    .discord-name {
-      font-size: 2em; /* Mais destaque */
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 5px;
-      color: #E0FFFF; /* Cor do título do tema */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra sutil */
-    }
+        .discord-description {
+            font-size: 1.1em;
+            color: #B0E0E6;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
 
-    .discord-members {
-      font-size: 1.1em;
-      color: #ADD8E6; /* Azul claro para membros */
-      margin-bottom: 20px;
-    }
+        .discord-join-button {
+            background-color: #5865F2; /* Azul Discord mais vibrante */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            border: 2px solid var(--neon-border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-    .discord-description-title {
-      font-size: 1.5em; /* Mais destaque */
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #E0FFFF; /* Cor do tema */
-      border-bottom: 1px solid rgba(173, 216, 230, 0.3); /* Linha divisória sutil */
-      padding-bottom: 5px;
-    }
+        .discord-join-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            /* Degradê com roxos e azuis vibrantes do Discord */
+            background: linear-gradient(45deg, #7289DA, #5865F2, #99AAB5);
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 8px;
+        }
 
-    .discord-description {
-      font-size: 1em;
-      color: #B0E0E6; /* Azul claro para descrição */
-      line-height: 1.6;
-      margin-bottom: 0;
-    }
+        .discord-join-button:hover::before {
+            opacity: 1;
+        }
 
-    .discord-join-button {
-      background-color: #007bff; /* Reutiliza o azul vibrante dos outros botões */
-      color: white;
-      padding: 15px 30px;
-      border-radius: 8px; /* Borda arredondada como outros botões */
-      text-decoration: none;
-      font-weight: 500;
-      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-      position: absolute;
-      top: 30px; /* Ajusta a posição */
-      right: 30px; /* Ajusta a posição */
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
+        .discord-join-button:hover {
+            transform: translateY(-8px);
+            /* Sombra e brilho mais pronunciados e alinhados com o roxo do Discord */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 0 15px #7289DA;
+            background-color: #4E5D94; /* Um azul mais escuro no hover para contraste */
+            border-color: rgba(255, 255, 255, 0.5);
+        }
 
-    .discord-join-button:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
-      background-color: #0056b3; /* Azul mais escuro no hover */
-    }
+        /* --- NOVOS ESTILOS PARA "SERVERS I'M STAFF" --- */
+        .staff-servers-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Para empilhar título e cards */
+            align-items: center;
+            padding: 80px 20px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 2px solid var(--neon-border-color);
+            border-bottom: 2px solid var(--neon-border-color);
+            margin-top: 100px;
+        }
+
+        .staff-servers-section h2 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: var(--main-text-color);
+            margin-bottom: 10px;
+            text-shadow: -2px -2px 0 var(--dark-blue-accent), 2px -2px 0 var(--dark-blue-accent), -2px 2px 0 var(--dark-blue-accent), 2px 2px 0 var(--dark-blue-accent);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .staff-servers-section p {
+            font-size: 1.1em;
+            color: var(--light-blue-accent);
+            margin-bottom: 50px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .server-cards-container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os cards quebrem linha */
+            justify-content: center; /* Centraliza os cards */
+            gap: 30px; /* Espaço entre os cards */
+            width: 100%;
+            max-width: 1200px; /* Largura máxima para o container de cards */
+        }
+
+        .server-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--neon-border-color);
+            color: var(--main-text-color);
+            font-family: 'Orbitron', sans-serif;
+            width: 300px; /* Largura fixa para cada card */
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: floatingText 3s ease-in-out infinite; /* Flutuação individual */
+            position: relative;
+            padding-bottom: 20px; /* Espaço para o texto na parte inferior */
+        }
+
+        .server-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--light-blue-accent); /* Efeito neon no hover */
+        }
+
+        .server-card-banner {
+            width: 100%;
+            height: 150px; /* Altura do banner do servidor */
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+            position: relative;
+        }
+
+        .server-card-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid rgba(0, 0, 0, 0.8); /* Borda do avatar */
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: -40px; /* Metade da altura do avatar para sobrepor o banner */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .server-card-content {
+            padding: 10px 20px 0;
+            margin-top: 50px; /* Para acomodar o avatar sobreposto */
+        }
+
+        .server-card-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--main-text-color);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .server-card-role {
+            font-size: 1em;
+            color: var(--light-blue-accent);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .server-card-members {
+            font-size: 0.9em;
+            color: #B0E0E6;
+            margin-bottom: 0;
+        }
+        /* --- FIM DOS NOVOS ESTILOS --- */
 
 
-    /* Responsividade */
-    @media (max-width: 900px) {
-      .discord-promo-section {
-        padding: 60px 15px;
-      }
-      .discord-banner {
-        height: 200px;
-      }
-      .discord-avatar {
-        width: 80px;
-        height: 80px;
-        margin-top: -60px;
-      }
-      .discord-info {
-        padding: 20px;
-        gap: 20px;
-      }
-      .discord-name {
-        font-size: 1.8em;
-      }
-      .discord-members {
-        font-size: 1em;
-      }
-      .discord-description-title {
-        font-size: 1.3em;
-      }
-      .discord-description {
-        font-size: 0.9em;
-      }
-      .discord-join-button {
-        padding: 12px 25px;
-        font-size: 18px;
-        top: 20px;
-        right: 20px;
-      }
-    }
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .discord-promo-section, .staff-servers-section {
+                padding: 60px 15px;
+            }
+            .discord-banner {
+                height: 200px;
+            }
+            .discord-avatar {
+                width: 80px;
+                height: 80px;
+                margin-top: -60px;
+            }
+            .discord-info {
+                padding: 20px;
+                gap: 20px;
+            }
+            .discord-name {
+                font-size: 1.8em;
+            }
+            .discord-members {
+                font-size: 1em;
+            }
+            .discord-description-title {
+                font-size: 1.3em;
+            }
+            .discord-description {
+                font-size: 0.9em;
+            }
+            .discord-join-button {
+                padding: 12px 25px;
+                font-size: 18px;
+                top: 20px;
+                right: 20px;
+            }
+            .staff-servers-section h2 {
+                font-size: 2.8em;
+            }
+            .staff-servers-section p {
+                font-size: 1em;
+            }
+            .server-card {
+                width: calc(50% - 20px); /* Dois cards por linha em tablets */
+                max-width: 320px; /* Garante que não fiquem muito grandes */
+            }
+        }
 
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 55px;
-      }
-      .buttons {
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 30px;
-      }
-      .button, .discord {
-        width: 70%;
-        max-width: 320px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .discord {
-        margin-top: 25px;
-      }
-      .discord-promo-section {
-        padding: 50px 15px;
-      }
-      .discord-card {
-        max-width: 100%; /* Ocupa a largura total da seção */
-      }
-      .discord-banner {
-        height: 150px;
-      }
-      .discord-avatar {
-        width: 70px;
-        height: 70px;
-        margin-top: -50px;
-      }
-      .discord-info {
-        flex-direction: column; /* stacked content on mobile */
-        align-items: center;
-        text-align: center;
-        padding-top: 5px;
-      }
-      .discord-name {
-        margin-top: 10px;
-      }
-      .discord-join-button {
-        position: static; /* Coloca o botão em fluxo normal para mobile */
-        margin-top: 20px; /* Espaço abaixo da descrição */
-        width: calc(100% - 40px); /* Ocupa a largura total do card com padding */
-      }
-      .discord-text {
-        width: 100%;
-        text-align: center;
-      }
-      .discord-description-title, .discord-description {
-        text-align: center; /* Centraliza a descrição também */
-        margin-left: auto;
-        margin-right: auto;
-        width: 90%;
-      }
-    }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 55px;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 30px;
+            }
+            .button {
+                width: 70%;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .discord-promo-section, .staff-servers-section {
+                padding: 50px 15px;
+            }
+            .discord-card {
+                max-width: 100%;
+            }
+            .discord-banner {
+                height: 150px;
+            }
+            .discord-avatar {
+                width: 70px;
+                height: 70px;
+                margin-top: -50px;
+            }
+            .discord-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-top: 5px;
+            }
+            .discord-name {
+                margin-top: 10px;
+            }
+            .discord-join-button {
+                position: static;
+                margin-top: 20px;
+                width: calc(100% - 40px);
+            }
+            .discord-text {
+                width: 100%;
+                text-align: center;
+            }
+            .discord-description-title, .discord-description {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                width: 90%;
+            }
+            .staff-servers-section h2 {
+                font-size: 2.2em;
+            }
+            .server-card {
+                width: 100%; /* Um card por linha em mobile */
+                max-width: 350px; /* Limita a largura em telas pequenas */
+            }
+        }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 40px;
-        text-shadow: -2px -2px 0 #000080, 2px -2px 0 #000080, -2px 2px 0 #000080, 2px 2px 0 #000080;
-      }
-      .button, .discord {
-        font-size: 16px;
-        padding: 10px 20px;
-      }
-      .button i, .discord i {
-        font-size: 22px;
-      }
-      .buttons {
-        gap: 10px;
-      }
-      .discord-banner {
-        height: 120px;
-      }
-      .discord-avatar {
-        width: 50px;
-        height: 50px;
-        margin-top: -30px;
-      }
-      .discord-name {
-        font-size: 1.5em;
-      }
-      .discord-members, .discord-description {
-        font-size: 0.8em;
-      }
-      .discord-description-title {
-        font-size: 1.2em;
-      }
-      .discord-join-button {
-        font-size: 16px;
-        padding: 8px 15px;
-      }
-    }
-  </style>
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 40px;
+                text-shadow: -2px -2px 0 var(--dark-blue-accent), 2px -2px 0 var(--dark-blue-accent), -2px 2px 0 var(--dark-blue-accent), 2px 2px 0 var(--dark-blue-accent);
+            }
+            .button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+            .button i {
+                font-size: 22px;
+            }
+            .buttons {
+                gap: 10px;
+            }
+            .discord-banner {
+                height: 120px;
+            }
+            .discord-avatar {
+                width: 50px;
+                height: 50px;
+                margin-top: -30px;
+            }
+            .discord-name {
+                font-size: 1.5em;
+            }
+            .discord-members, .discord-description {
+                font-size: 0.8em;
+            }
+            .discord-description-title {
+                font-size: 1.2em;
+            }
+            .discord-join-button {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+            .staff-servers-section h2 {
+                font-size: 1.8em;
+            }
+            .staff-servers-section p {
+                font-size: 0.9em;
+            }
+            .server-card-name {
+                font-size: 1.5em;
+            }
+            .server-card-role {
+                font-size: 0.9em;
+            }
+            .server-card-members {
+                font-size: 0.8em;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="content">
-    <h1>Reverse Website</h1>
-    <div class="buttons">
-      <a href="https://github.com/reverso1925" target="_blank" class="button github">
-        <i class="fa-brands fa-github"></i>GitHub
-      </a>
-      <a href="https://bsky.app/profile/newreverse.site" target="_blank" class="button bluesky">
-        <i class="fa-solid fa-cloud"></i>Bluesky
-      </a>
-      <a href="https://www.youtube.com/@reversehere" target="_blank" class="button youtube">
-        <i class="fa-brands fa-youtube"></i>YouTube
-      </a>
-    </div>
-  </div>
-
-  <section class="discord-promo-section">
-    <div class="discord-card">
-      <div class="discord-banner"></div>
-      <div class="discord-info">
-        <div class="discord-avatar"></div>
-        <div class="discord-text">
-          <p class="discord-name">Clube Reverse</p>
-          <p class="discord-members">0 membros</p>
-          <p class="discord-description-title">Meu Servidor</p>
-          <p class="discord-description">Este é o meu servidor. Neste servidor, eu interajo com você, faço experimentos sociais e qualquer coisa que um servidor forneça. Venha conversar comigo ou com outras pessoas</p>
+    <div class="content">
+    <img src="icon.png" height="300" width="300">
+        <h1>Reverse Website</h1>
+        <div class="buttons">
+            <a href="https://github.com/reverso1925" target="_blank" class="button github">
+                <i class="fa-brands fa-github"></i>GitHub
+            </a>
+            <a href="https://bsky.app/profile/newreverse.site" target="_blank" class="button bluesky">
+                <i class="fa-solid fa-cloud"></i>Bluesky
+            </a>
+            <a href="https://www.youtube.com/@reversehere" target="_blank" class="button youtube">
+                <i class="fa-brands fa-youtube"></i>YouTube
+            </a>
+            <a href="/search" class="button search">
+            <i class="fa fa-search"></i>New Search
+            </a>
         </div>
-        <a href="https://discord.gg/wWuzjwkPWB" target="_blank" class="discord-join-button">
-          Entrar
-        </a>
-      </div>
     </div>
-  </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const content = document.querySelector('.content');
+    <section class="discord-promo-section">
+        <div class="discord-card">
+            <div class="discord-banner"></div>
+            <div class="discord-info">
+                <div class="discord-avatar"></div>
+                <div class="discord-text">
+                    <p class="discord-name">Clube Reverse</p>
+                    <p class="discord-members" id="discordMembersCount">2 membros</p>
+                    <p class="discord-description-title">Meu Servidor</p>
+                    <p class="discord-description">Este é o meu servidor. Neste servidor, eu interajo com você, faço experimentos sociais e qualquer coisa que um servidor forneça. Venha conversar comigo ou com outras pessoas</p>
+                </div>
+                <a href="https://discord.gg/fGRJmzC5Hf" target="_blank" class="discord-join-button">
+                    Entrar
+                </a>
+            </div>
+        </div>
+    </section>
 
-      document.body.addEventListener('mousemove', function(e) {
-        const x = e.clientX / window.innerWidth - 0.5;
-        const y = e.clientY / window.innerHeight - 0.5;
-        content.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
-      });
-    });
-  </script>
+    <section class="staff-servers-section">
+        <h2>Servers que sou staff</h2>
+        <p>Aqui estão alguns dos servidores nos quais faço parte da equipe.</p>
+        <div class="server-cards-container">
+            <a href="https://discord.gg/JT2ek7PCqc" target="_blank" class="server-card">
+                <div class="server-card-banner" style="background-image: url('banner_porkinbr.png');"></div>
+                <div class="server-card-avatar" style="background-image: url('avatar_porkinbr.png');"></div>
+                <div class="server-card-content">
+                    <p class="server-card-name">Lives Porkinbr</p>
+                    <p class="server-card-role">Ex Moderador</p>
+                    <p class="server-card-members">+20.000 membros</p>
+                </div>
+            </a>
+
+            <a href="https://discord.gg/wA2QxkVjce" target="_blank" class="server-card">
+                <div class="server-card-banner" style="background-image: url('banner_exercitus.gif');"></div>
+                <div class="server-card-avatar" style="background-image: url('avatar_exercitus.png');"></div>
+                <div class="server-card-content">
+                    <p class="server-card-name">Exercitus I</p>
+                    <p class="server-card-role">Ex Gerente</p>
+                    <p class="server-card-members">+500 membros</p>
+                </div>
+            </a>
+
+            <a href="https://discord.gg/lala-du-discord-680529503750979620" target="_blank" class="server-card">
+                <div class="server-card-banner" style="background-image: url('banner_lala.gif');"></div>
+                <div class="server-card-avatar" style="background-image: url('avatar_lala.gif');"></div>
+                <div class="server-card-content">
+                    <p class="server-card-name">Lala du Discord</p>
+                    <p class="server-card-role">Ex Ajudante</p>
+                    <p class="server-card-members">+60.000 membros</p>
+                </div>
+            </a>
+
+            </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Removendo o script de seguir o mouse se ele estiver aqui,
+            // já que a flutuação é via CSS.
+            // A animação 'floatingText' já está aplicada via CSS.
+        });
+    </script>
 </body>
 </html>
