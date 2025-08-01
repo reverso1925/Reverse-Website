@@ -1,2 +1,2 @@
-http://newreverse.site
-![image](https://github.com/user-attachments/assets/313b10ac-517f-4417-afff-858480720985)
+https://newreverse.site
+<img width="1897" height="919" alt="image" src="https://github.com/user-attachments/assets/fe3d0e26-cf63-4116-9004-3610972e5a0f" />
