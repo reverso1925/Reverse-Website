@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Reverse Website</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Reverse Website</title>
+    
+    <!-- Preconnect para melhor performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Favicon -->
     <link rel="icon" href="icon.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Fonts e CSS externos -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        /* ===== VARIÁVEIS CSS ===== */
         :root {
-            --main-text-color: #E0FFFF; /* Azul-claro metálico */
-            --primary-blue: #4682B4; /* Steel Blue */
-            --secondary-blue: #6A5ACD; /* Slate Blue */
-            --tertiary-blue: #4169E1; /* Royal Blue */
-            --dark-background: #1A1A1A; /* Quase preto para elementos escuros */
-            --light-blue-accent: #ADD8E6; /* Azul claro para detalhes */
-            --dark-blue-accent: #000080; /* Navy para sombras */
-            --neon-border-color: rgba(173, 216, 230, 0.7); /* LightBlue para bordas neon */
+            --text-primary: #E0FFFF;
+            --blue-primary: #4682B4;
+            --blue-secondary: #6A5ACD;
+            --blue-tertiary: #4169E1;
+            --bg-dark: #1A1A1A;
+            --accent-light: #ADD8E6;
+            --accent-dark: #000080;
+            --neon-border: rgba(173, 216, 230, 0.7);
+            --neon-glow: #5CE1FE;
+            --shadow-primary: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.6);
+            --transition-base: 0.3s ease-in-out;
+        }
+
+        /* ===== RESET E BASE ===== */
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -28,25 +46,48 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: backgroundColorPulseBlue 6s infinite alternate;
-            background-image: radial-gradient(var(--neon-border-color) 1px, transparent 1px),
-                              radial-gradient(var(--neon-border-color) 1px, transparent 1px);
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: 
+                radial-gradient(var(--neon-border) 1px, transparent 1px),
+                radial-gradient(var(--neon-border) 1px, transparent 1px);
             background-position: 0 0, 20px 20px;
             background-size: 40px 40px;
-            color: var(--main-text-color);
-            font-family: 'Orbitron', sans-serif;
-            overflow-x: hidden; /* Evita scroll horizontal indesejado */
+            animation: bgPulse 6s infinite alternate;
+        }
+                    .theme-dark {
+                --text-primary: #E0FFFF;
+                --blue-primary: #003761;
+                --blue-secondary: #261c5f;
+                --blue-tertiary: #2a4185;
+                --bg-dark: #1A1A1A;
+                --accent-light: #ADD8E6;
+                --accent-dark: #000080;
+                --neon-border: rgba(173, 216, 230, 0.7);
+                --neon-glow: #5CE1FE;
+                --shadow-primary: rgba(0, 0, 0, 0.3);
+                --shadow-hover: rgba(0, 0, 0, 0.6);
+                --transition-base: 0.3s ease-in-out;
+            }
+
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes bgPulse {
+            0% { background-color: var(--blue-primary); }
+            50% { background-color: var(--blue-secondary); }
+            100% { background-color: var(--blue-tertiary); }
         }
 
-        @keyframes backgroundColorPulseBlue {
-            0% { background-color: var(--primary-blue); }
-            50% { background-color: var(--secondary-blue); }
-            100% { background-color: var(--tertiary-blue); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .content {
+        /* ===== LAYOUT PRINCIPAL ===== */
+        .main-content {
             text-align: center;
-            animation: floatingText 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -54,26 +95,28 @@
             min-height: 100vh;
             width: 100%;
             padding: 20px;
-            box-sizing: border-box;
         }
 
-        @keyframes floatingText {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .logo {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
         }
 
-        h1 {
-            font-size: 80px;
+        .title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 700;
-            color: var(--main-text-color);
             margin: 0;
-            text-shadow: -3px -3px 0 var(--dark-blue-accent), 3px -3px 0 var(--dark-blue-accent), -3px 3px 0 var(--dark-blue-accent), 3px 3px 0 var(--dark-blue-accent);
-            font-family: 'Orbitron', sans-serif;
+            text-shadow: 
+                -3px -3px 0 var(--accent-dark),
+                3px -3px 0 var(--accent-dark),
+                -3px 3px 0 var(--accent-dark),
+                3px 3px 0 var(--accent-dark);
             letter-spacing: 2px;
         }
 
-        .buttons {
+        /* ===== BOTÕES ===== */
+        .buttons-container {
             display: flex;
             gap: 25px;
             margin-top: 50px;
@@ -81,115 +124,165 @@
             flex-wrap: wrap;
         }
 
-        .button {
+        .btn {
             display: flex;
             align-items: center;
             padding: 15px 30px;
             border-radius: 8px;
             text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
             font-size: 20px;
             font-weight: 500;
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
             color: white;
-            border: 2px solid var(--neon-border-color); /* Borda inicial temática */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative; /* Para o efeito neon */
-            overflow: hidden; /* Para garantir que o pseudo-elemento não vaze */
+            border: 2px solid var(--neon-border);
+            box-shadow: 0 5px 15px var(--shadow-primary);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Efeito de neon base para todos os botões, será sobrescrito por classes específicas */
-        .button::before {
+        .btn::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            inset: -2px;
             z-index: -1;
-            filter: blur(8px); /* Efeito de brilho */
+            filter: blur(8px);
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity var(--transition-base);
             border-radius: 8px;
         }
 
-        .button:hover::before {
+        .btn:hover {
+            transform: translateY(-8px);
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn:hover::before {
             opacity: 1;
         }
 
-        .button:hover {
-            transform: translateY(-8px);
-            background-color: rgba(255, 255, 255, 0.15); /* Fundo mais claro no hover */
-            border-color: rgba(255, 255, 255, 0.5); /* Borda mais clara no hover */
-        }
-
-        .github {
-            background-color: #24292e; /* Cinza escuro principal */
-        }
-        .github::before {
-            /* Degradê com tons de cinza do GitHub para um efeito mais integrado */
-            background: linear-gradient(45deg, #000000, #474747, #000000);
-        }
-        .github:hover {
-            background-color: #1a1e22; /* Um cinza um pouco mais escuro no hover */
-            /* Sombra mais suave e brilho sutilmente azulado, como um código */
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(88, 166, 255, 0.4);
-        }
-        .bluesky {
-            background-color: #0085FF; /* Azul principal do Bluesky */
-        }
-        .bluesky::before {
-            /* Degradê com azuis do Bluesky, adicionando um tom mais claro e arejado */
-            background: linear-gradient(45deg, #0400FF, #38B0DE, #0400FF);
-        }
-        .bluesky:hover {
-            background-color: #006EDC; /* Azul ligeiramente mais escuro no hover */
-            /* Sombra mais profunda e brilho azul claro para um efeito "céu" */
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), 0 0 20px #5CE1FE;
-        }
-        .youtube {
-            background-color: #FF0000; /* Vermelho icônico do YouTube */
-        }
-        .youtube::before {
-            /* Degradê com tons de vermelho do YouTube, focando na intensidade */
-            background: linear-gradient(45deg, #A10000, #FF0000, #A10000);
-        }
-        .youtube:hover {
-            background-color: #E60000; /* Um vermelho um pouco mais escuro no hover */
-            /* Sombra forte e brilho vibrante para destacar o vermelho */
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 20px #FF3333;
-        }
-       .search {
-    background-color: #0000FF; /* Azul do Search */
-}
-        .search::before {
-    /* Degradê com tons de azul do Search, focando na intensidade */
-    background: linear-gradient(45deg, #002575, #0051FF, #002575);
-}
-       .search:hover {
-    background-color: #0000CC; /* Um azul um pouco mais escuro no hover */
-    /* Sombra forte e brilho vibrante para destacar o azul */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6), 0 0 20px #3366FF;
-}
-        }
-        .button i {
+        .btn i {
             margin-right: 12px;
             font-size: 26px;
         }
 
-        .discord-promo-section {
+        /* Estilos específicos dos botões */
+        .btn-github {
+            background-color: #24292e;
+        }
+        .btn-github::before {
+            background: linear-gradient(45deg, #000, #474747, #000);
+        }
+        .btn-github:hover {
+            background-color: #1a1e22;
+            box-shadow: 0 15px 25px var(--shadow-hover), 0 0 20px rgba(88, 166, 255, 0.4);
+        }
+
+        .btn-bluesky {
+            background-color: #0085FF;
+        }
+        .btn-bluesky::before {
+            background: linear-gradient(45deg, #0400FF, #38B0DE, #0400FF);
+        }
+        .btn-bluesky:hover {
+            background-color: #006EDC;
+            box-shadow: 0 15px 25px var(--shadow-primary), 0 0 20px var(--neon-glow);
+        }
+
+        .btn-youtube {
+            background-color: #FF0000;
+        }
+        .btn-youtube::before {
+            background: linear-gradient(45deg, #A10000, #FF0000, #A10000);
+        }
+        .btn-youtube:hover {
+            background-color: #E60000;
+            box-shadow: 0 15px 25px var(--shadow-hover), 0 0 20px #FF3333;
+        }
+
+        .btn-search {
+            background-color: #0000FF;
+        }
+        .btn-search::before {
+            background: linear-gradient(45deg, #002575, #0051FF, #002575);
+        }
+        .btn-search:hover {
+            background-color: #0000CC;
+            box-shadow: 0 15px 25px var(--shadow-hover), 0 0 20px #3366FF;
+        }
+        .btn-blog {
+            background-color: #e83939;
+        }
+        .btn-blog::before {
+            background: linear-gradient(45deg, #ca3232, #e83939, #ca3232);
+        }
+        .btn-blog:hover {
+            background-color: #ca3232;
+            box-shadow: 0 15px 25px var(--shadow-hover), 0 0 20px #ca3232;
+        }
+            /* ===== BOTÃO THEME ===== */
+            .btn-theme {
+                position: fixed;
+                top: 30px;
+                bottom: auto;
+                right: 30px;
+                ;
+                background-color: #24292e;
+                color: var(--text-primary);
+                border: 2px solid var(--neon-border);
+                box-shadow: 0 5px 15px var(--shadow-primary);
+                padding: 15px 30px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 20px;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                overflow: hidden;
+                z-index: 1000;
+                transition: all var(--transition-base);
+            }
+            .btn-theme::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                background: linear-gradient(45deg, #000, #474747, #000);
+                z-index: -1;
+                filter: blur(8px);
+                opacity: 0;
+                transition: opacity var(--transition-base);
+                border-radius: 8px;
+            }
+
+            .btn-theme:hover {
+                background-color: #1a1e22;
+                box-shadow: 0 15px 25px var(--shadow-hover), 0 0 20px rgba(88, 166, 255, 0.4);
+                transform: translateY(-8px);
+            }
+
+            .btn-theme:hover::before {
+                opacity: 1;
+            }
+                        .btn-theme i {
+                margin-right: 12px;
+                font-size: 26px;
+            }
+
+        /* ===== SEÇÕES ===== */
+        .section {
             width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             padding: 80px 20px;
-            box-sizing: border-box;
             background-color: rgba(0, 0, 0, 0.2);
-            border-top: 2px solid var(--neon-border-color);
-            border-bottom: 2px solid var(--neon-border-color);
+            border-top: 2px solid var(--neon-border);
+            border-bottom: 2px solid var(--neon-border);
             margin-top: 100px;
         }
 
+        /* ===== CARD DISCORD ===== */
         .discord-card {
             width: 100%;
             max-width: 1000px;
@@ -197,20 +290,15 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            border: 3px solid var(--neon-border-color);
-            color: var(--main-text-color);
-            font-family: 'Orbitron', sans-serif;
+            border: 3px solid var(--neon-border);
             position: relative;
         }
 
         .discord-banner {
             width: 100%;
             height: 250px;
-            background-image: url('discord_banner.png'); /* Certifique-se de ter esta imagem */
-            background-size: cover;
-            background-position: center;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+            background: url('discord_banner.png') center/cover;
+            border-radius: 12px 12px 0 0;
         }
 
         .discord-info {
@@ -225,14 +313,11 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            border: 5px solid var(--dark-background);
-            background-image: url('discord_avatar.png'); /* Certifique-se de ter esta imagem */
-            background-size: cover;
-            background-position: center;
+            border: 5px solid var(--bg-dark);
+            background: url('discord_avatar.png') center/cover;
             margin-top: -80px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 5px 20px var(--shadow-hover);
             flex-shrink: 0;
-            position: relative;
             z-index: 1;
         }
 
@@ -244,15 +329,13 @@
         .discord-name {
             font-size: 2.2em;
             font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 5px;
-            color: var(--main-text-color);
+            margin: 0 0 5px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
         }
 
         .discord-members {
             font-size: 1.2em;
-            color: var(--light-blue-accent);
+            color: var(--accent-light);
             margin-bottom: 20px;
         }
 
@@ -260,7 +343,6 @@
             font-size: 1.6em;
             font-weight: 700;
             margin-bottom: 10px;
-            color: var(--main-text-color);
             border-bottom: 1px solid rgba(173, 216, 230, 0.4);
             padding-bottom: 5px;
         }
@@ -269,93 +351,76 @@
             font-size: 1.1em;
             color: #B0E0E6;
             line-height: 1.6;
-            margin-bottom: 0;
+            margin: 0;
         }
 
-        .discord-join-button {
-            background-color: #5865F2; /* Azul Discord mais vibrante */
+        .discord-join-btn {
+            background-color: #5865F2;
             color: white;
             padding: 15px 30px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
+            transition: all var(--transition-base);
             position: absolute;
             top: 30px;
             right: 30px;
-            font-family: 'Orbitron', sans-serif;
             font-size: 20px;
-            border: 2px solid var(--neon-border-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--neon-border);
+            box-shadow: 0 5px 15px var(--shadow-primary);
         }
 
-        .discord-join-button::before {
+        .discord-join-btn::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            /* Degradê com roxos e azuis vibrantes do Discord */
+            inset: -2px;
             background: linear-gradient(45deg, #7289DA, #5865F2, #99AAB5);
             z-index: -1;
             filter: blur(8px);
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity var(--transition-base);
             border-radius: 8px;
         }
 
-        .discord-join-button:hover::before {
+        .discord-join-btn:hover::before {
             opacity: 1;
         }
 
-        .discord-join-button:hover {
+        .discord-join-btn:hover {
             transform: translateY(-8px);
-            /* Sombra e brilho mais pronunciados e alinhados com o roxo do Discord */
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 0 15px #7289DA;
-            background-color: #4E5D94; /* Um azul mais escuro no hover para contraste */
+            background-color: #4E5D94;
             border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* --- NOVOS ESTILOS PARA "SERVERS I'M STAFF" --- */
-        .staff-servers-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column; /* Para empilhar título e cards */
-            align-items: center;
-            padding: 80px 20px;
-            box-sizing: border-box;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-top: 2px solid var(--neon-border-color);
-            border-bottom: 2px solid var(--neon-border-color);
-            margin-top: 100px;
-        }
-
-        .staff-servers-section h2 {
-            font-size: 3.5em;
+        /* ===== SEÇÃO STAFF SERVERS ===== */
+        .section-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
             font-weight: 700;
-            color: var(--main-text-color);
             margin-bottom: 10px;
-            text-shadow: -2px -2px 0 var(--dark-blue-accent), 2px -2px 0 var(--dark-blue-accent), -2px 2px 0 var(--dark-blue-accent), 2px 2px 0 var(--dark-blue-accent);
+            text-shadow: 
+                -2px -2px 0 var(--accent-dark),
+                2px -2px 0 var(--accent-dark),
+                -2px 2px 0 var(--accent-dark),
+                2px 2px 0 var(--accent-dark);
             text-align: center;
             letter-spacing: 1px;
         }
 
-        .staff-servers-section p {
+        .section-description {
             font-size: 1.1em;
-            color: var(--light-blue-accent);
+            color: var(--accent-light);
             margin-bottom: 50px;
             text-align: center;
             max-width: 800px;
         }
 
-        .server-cards-container {
-            display: flex;
-            flex-wrap: wrap; /* Permite que os cards quebrem linha */
-            justify-content: center; /* Centraliza os cards */
-            gap: 30px; /* Espaço entre os cards */
+        .server-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             width: 100%;
-            max-width: 1200px; /* Largura máxima para o container de cards */
+            max-width: 1200px;
         }
 
         .server-card {
@@ -363,318 +428,273 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--neon-border-color);
-            color: var(--main-text-color);
-            font-family: 'Orbitron', sans-serif;
-            width: 300px; /* Largura fixa para cada card */
+            border: 2px solid var(--neon-border);
+            text-decoration: none;
+            color: inherit;
             text-align: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            animation: floatingText 3s ease-in-out infinite; /* Flutuação individual */
-            position: relative;
-            padding-bottom: 20px; /* Espaço para o texto na parte inferior */
+            transition: all var(--transition-base);
+            animation: float 3s ease-in-out infinite;
+            padding-bottom: 20px;
         }
 
         .server-card:hover {
             transform: translateY(-12px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--light-blue-accent); /* Efeito neon no hover */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px var(--accent-light);
         }
 
-        .server-card-banner {
+        .server-banner {
             width: 100%;
-            height: 150px; /* Altura do banner do servidor */
+            height: 150px;
             background-size: cover;
             background-position: center;
-            border-top-left-radius: 13px;
-            border-top-right-radius: 13px;
+            border-radius: 13px 13px 0 0;
             position: relative;
         }
 
-        .server-card-avatar {
+        .server-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 4px solid rgba(0, 0, 0, 0.8); /* Borda do avatar */
+            border: 4px solid rgba(0, 0, 0, 0.8);
             background-size: cover;
             background-position: center;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            margin-top: -40px; /* Metade da altura do avatar para sobrepor o banner */
+            margin-top: -40px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             z-index: 2;
         }
 
-        .server-card-content {
+        .server-content {
             padding: 10px 20px 0;
-            margin-top: 50px; /* Para acomodar o avatar sobreposto */
+            margin-top: 50px;
         }
 
-        .server-card-name {
+        .server-name {
             font-size: 1.8em;
             font-weight: 700;
             margin-bottom: 5px;
-            color: var(--main-text-color);
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
-        .server-card-role {
+        .server-role {
             font-size: 1em;
-            color: var(--light-blue-accent);
+            color: var(--accent-light);
             margin-bottom: 15px;
             font-weight: 500;
         }
 
-        .server-card-members {
+        .server-members {
             font-size: 0.9em;
             color: #B0E0E6;
-            margin-bottom: 0;
-        }
-        /* --- FIM DOS NOVOS ESTILOS --- */
-
-
-        /* Responsividade */
-        @media (max-width: 900px) {
-            .discord-promo-section, .staff-servers-section {
-                padding: 60px 15px;
-            }
-            .discord-banner {
-                height: 200px;
-            }
-            .discord-avatar {
-                width: 80px;
-                height: 80px;
-                margin-top: -60px;
-            }
-            .discord-info {
-                padding: 20px;
-                gap: 20px;
-            }
-            .discord-name {
-                font-size: 1.8em;
-            }
-            .discord-members {
-                font-size: 1em;
-            }
-            .discord-description-title {
-                font-size: 1.3em;
-            }
-            .discord-description {
-                font-size: 0.9em;
-            }
-            .discord-join-button {
-                padding: 12px 25px;
-                font-size: 18px;
-                top: 20px;
-                right: 20px;
-            }
-            .staff-servers-section h2 {
-                font-size: 2.8em;
-            }
-            .staff-servers-section p {
-                font-size: 1em;
-            }
-            .server-card {
-                width: calc(50% - 20px); /* Dois cards por linha em tablets */
-                max-width: 320px; /* Garante que não fiquem muito grandes */
-            }
+            margin: 0;
         }
 
+        /* ===== MEDIA QUERIES ===== */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 55px;
+            .section {
+                padding: 50px 15px;
             }
-            .buttons {
+
+            .buttons-container {
                 flex-direction: column;
                 gap: 15px;
                 margin-top: 30px;
             }
-            .button {
+
+            .btn {
                 width: 70%;
                 max-width: 320px;
-                margin-left: auto;
-                margin-right: auto;
+                margin: 0 auto;
             }
-            .discord-promo-section, .staff-servers-section {
-                padding: 50px 15px;
-            }
-            .discord-card {
-                max-width: 100%;
-            }
+
             .discord-banner {
                 height: 150px;
             }
+
             .discord-avatar {
                 width: 70px;
                 height: 70px;
                 margin-top: -50px;
             }
+
             .discord-info {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
                 padding-top: 5px;
             }
+
             .discord-name {
                 margin-top: 10px;
             }
-            .discord-join-button {
+
+            .discord-join-btn {
                 position: static;
                 margin-top: 20px;
                 width: calc(100% - 40px);
             }
+
             .discord-text {
                 width: 100%;
                 text-align: center;
             }
-            .discord-description-title, .discord-description {
-                text-align: center;
-                margin-left: auto;
-                margin-right: auto;
-                width: 90%;
-            }
-            .staff-servers-section h2 {
-                font-size: 2.2em;
-            }
-            .server-card {
-                width: 100%; /* Um card por linha em mobile */
-                max-width: 350px; /* Limita a largura em telas pequenas */
+
+            .server-cards {
+                grid-template-columns: 1fr;
+                max-width: 350px;
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 40px;
-                text-shadow: -2px -2px 0 var(--dark-blue-accent), 2px -2px 0 var(--dark-blue-accent), -2px 2px 0 var(--dark-blue-accent), 2px 2px 0 var(--dark-blue-accent);
+            .logo {
+                width: 200px;
+                height: 200px;
             }
-            .button {
+
+            .btn {
                 font-size: 16px;
                 padding: 10px 20px;
             }
-            .button i {
+
+            .btn i {
                 font-size: 22px;
             }
-            .buttons {
-                gap: 10px;
-            }
+
             .discord-banner {
                 height: 120px;
             }
+
             .discord-avatar {
                 width: 50px;
                 height: 50px;
                 margin-top: -30px;
             }
+
             .discord-name {
                 font-size: 1.5em;
             }
-            .discord-members, .discord-description {
+
+            .discord-members,
+            .discord-description {
                 font-size: 0.8em;
             }
+
             .discord-description-title {
                 font-size: 1.2em;
             }
-            .discord-join-button {
+
+            .discord-join-btn {
                 font-size: 16px;
                 padding: 8px 15px;
             }
-            .staff-servers-section h2 {
-                font-size: 1.8em;
-            }
-            .staff-servers-section p {
-                font-size: 0.9em;
-            }
-            .server-card-name {
+
+            .server-name {
                 font-size: 1.5em;
             }
-            .server-card-role {
+
+            .server-role {
                 font-size: 0.9em;
             }
-            .server-card-members {
+
+            .server-members {
                 font-size: 0.8em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="content">
-    <img src="icon.png" height="300" width="300">
-        <h1>Reverse Website</h1>
-        <div class="buttons">
-            <a href="https://github.com/reverso1925" target="_blank" class="button github">
-                <i class="fa-brands fa-github"></i>GitHub
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <img src="icon.png" alt="Reverse Logo" class="logo">
+        <h1 class="title">Reverse Website</h1>
+        <nav class="buttons-container">
+            <a href="https://github.com/reverso1925" target="_blank" class="btn btn-github" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>GitHub
             </a>
-            <a href="https://bsky.app/profile/newreverse.site" target="_blank" class="button bluesky">
-                <i class="fa-solid fa-cloud"></i>Bluesky
+            <a href="https://bsky.app/profile/newreverse.site" target="_blank" class="btn btn-bluesky" aria-label="Bluesky">
+                <i class="fa-solid fa-cloud" aria-hidden="true"></i>Bluesky
             </a>
-            <a href="https://www.youtube.com/@reversehere" target="_blank" class="button youtube">
-                <i class="fa-brands fa-youtube"></i>YouTube
+            <a href="https://www.youtube.com/@reversehere" target="_blank" class="btn btn-youtube" aria-label="YouTube">
+                <i class="fa-brands fa-youtube" aria-hidden="true"></i>YouTube
             </a>
-            <a href="/search" class="button search">
-            <i class="fa fa-search"></i>New Search
+            <a href="/search" class="btn btn-search" aria-label="Pesquisar">
+                <i class="fa fa-search" aria-hidden="true"></i>New Search
             </a>
-        </div>
-    </div>
+            <a href="https://newreverse.vivaldi.net" class="btn btn-blog">
+            <i class="fas fa-globe" aria-hidden="true"></i>Blog
+            </a>
+        </nav>
+    </main>
 
-    <section class="discord-promo-section">
+    <!-- Seção Discord -->
+    <section class="section" aria-labelledby="discord-title">
         <div class="discord-card">
-            <div class="discord-banner"></div>
+            <div class="discord-banner" role="img" aria-label="Banner do Discord"></div>
             <div class="discord-info">
-                <div class="discord-avatar"></div>
+                <div class="discord-avatar" role="img" aria-label="Avatar do Discord"></div>
                 <div class="discord-text">
-                    <p class="discord-name">Clube Reverse</p>
-                    <p class="discord-members" id="discordMembersCount">2 membros</p>
-                    <p class="discord-description-title">Meu Servidor</p>
+                    <h2 class="discord-name" id="discord-title">Clube Reverse</h2>
+                    <p class="discord-members">10 membros</p>
+                    <h3 class="discord-description-title">Meu Servidor</h3>
                     <p class="discord-description">Este é o meu servidor. Neste servidor, eu interajo com você, faço experimentos sociais e qualquer coisa que um servidor forneça. Venha conversar comigo ou com outras pessoas</p>
                 </div>
-                <a href="https://discord.gg/fGRJmzC5Hf" target="_blank" class="discord-join-button">
+                <a href="https://discord.gg/fGRJmzC5Hf" target="_blank" class="discord-join-btn" aria-label="Entrar no Discord">
                     Entrar
                 </a>
             </div>
         </div>
     </section>
+        <button id="theme-toggle" class="btn btn-theme" aria-label="Alternar Tema">
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i> Alternar Tema
+        </button>
 
-    <section class="staff-servers-section">
-        <h2>Servers que sou staff</h2>
-        <p>Aqui estão alguns dos servidores nos quais faço parte da equipe.</p>
-        <div class="server-cards-container">
-            <a href="https://discord.gg/JT2ek7PCqc" target="_blank" class="server-card">
-                <div class="server-card-banner" style="background-image: url('banner_porkinbr.png');"></div>
-                <div class="server-card-avatar" style="background-image: url('avatar_porkinbr.png');"></div>
-                <div class="server-card-content">
-                    <p class="server-card-name">Lives Porkinbr</p>
-                    <p class="server-card-role">Ex Moderador</p>
-                    <p class="server-card-members">+20.000 membros</p>
+    <!-- Seção Servers Staff -->
+    <section class="section" aria-labelledby="staff-title">
+        <h2 class="section-title" id="staff-title">Servers que sou staff</h2>
+        <p class="section-description">Aqui estão alguns dos servidores nos quais faço parte da equipe.</p>
+        <div class="server-cards">
+            <!-- Card 1 -->
+            <a href="https://discord.gg/JT2ek7PCqc" target="_blank" class="server-card" aria-label="Lives Porkinbr">
+                <div class="server-banner" style="background-image: url('banner_porkinbr.png');" role="img" aria-label="Banner Lives Porkinbr"></div>
+                <div class="server-avatar" style="background-image: url('avatar_porkinbr.png');" role="img" aria-label="Avatar Lives Porkinbr"></div>
+                <div class="server-content">
+                    <h3 class="server-name">Lives Porkinbr</h3>
+                    <p class="server-role">Ex Moderador</p>
+                    <p class="server-members">+25.000 membros</p>
                 </div>
             </a>
 
-            <a href="https://discord.gg/wA2QxkVjce" target="_blank" class="server-card">
-                <div class="server-card-banner" style="background-image: url('banner_exercitus.gif');"></div>
-                <div class="server-card-avatar" style="background-image: url('avatar_exercitus.png');"></div>
-                <div class="server-card-content">
-                    <p class="server-card-name">Exercitus I</p>
-                    <p class="server-card-role">Ex Gerente</p>
-                    <p class="server-card-members">+500 membros</p>
+            <!-- Card 2 -->
+            <a href="https://discord.gg/wA2QxkVjce" target="_blank" class="server-card" aria-label="Exercitus I">
+                <div class="server-banner" style="background-image: url('banner_exercitus.gif');" role="img" aria-label="Banner Exercitus I"></div>
+                <div class="server-avatar" style="background-image: url('avatar_exercitus.png');" role="img" aria-label="Avatar Exercitus I"></div>
+                <div class="server-content">
+                    <h3 class="server-name">Exercitus I</h3>
+                    <p class="server-role">Ex Gerente</p>
+                    <p class="server-members">+700 membros</p>
                 </div>
             </a>
 
-            <a href="https://discord.gg/lala-du-discord-680529503750979620" target="_blank" class="server-card">
-                <div class="server-card-banner" style="background-image: url('banner_lala.gif');"></div>
-                <div class="server-card-avatar" style="background-image: url('avatar_lala.gif');"></div>
-                <div class="server-card-content">
-                    <p class="server-card-name">Lala du Discord</p>
-                    <p class="server-card-role">Ex Ajudante</p>
-                    <p class="server-card-members">+60.000 membros</p>
+            <!-- Card 3 -->
+            <a href="https://discord.gg/lala-du-discord-680529503750979620" target="_blank" class="server-card" aria-label="Lala du Discord">
+                <div class="server-banner" style="background-image: url('banner_lala.gif');" role="img" aria-label="Banner Lala du Discord"></div>
+                <div class="server-avatar" style="background-image: url('avatar_lala.gif');" role="img" aria-label="Avatar Lala du Discord"></div>
+                <div class="server-content">
+                    <h3 class="server-name">Lala du Discord</h3>
+                    <p class="server-role">Ex Ajudante</p>
+                    <p class="server-members">+60.000 membros</p>
                 </div>
             </a>
-
-            </div>
+        </div>
     </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Removendo o script de seguir o mouse se ele estiver aqui,
-            // já que a flutuação é via CSS.
-            // A animação 'floatingText' já está aplicada via CSS.
-        });
-    </script>
+            <script>
+            const toggleBtn = document.getElementById("theme-toggle");
+            toggleBtn.addEventListener("click", () => {
+                document.documentElement.classList.toggle("theme-dark");
+            });
+
+        </script>
 </body>
 </html>
